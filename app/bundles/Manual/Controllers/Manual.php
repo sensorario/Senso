@@ -17,7 +17,20 @@ class Manual
      */
     public function index()
     {
-        return Settings::getGlobals([]);
+        return Settings::getGlobals([
+                    'title' => 'Manuale'
+                ]);
+    }
+
+    /**
+     * @Route(value="credits",name="manual_credits");
+     * @View(value="credits")
+     */
+    public function credits()
+    {
+        return Settings::getGlobals([
+                    'title' => 'Crediti'
+                ]);
     }
 
 }

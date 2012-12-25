@@ -47,6 +47,7 @@
                             <li class="nav-header">Nav header</li>
                             <li><a href="{path{contatti}}">Contatti</a></li>
                             <li><a href="{path{blog_dashboard}}">Blog</a></li>
+                            <li><a href="{path{manual_credits}}">Credits</a></li>
                         </ul>
                     </li>
                 </ul>
