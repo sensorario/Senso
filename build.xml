@@ -1,0 +1,11 @@
+<project name="Senso" default="all">
+    <target name="all" depends="routing,bootstrap">
+    </target>
+    <target name="routing">
+        <exec command="php routes.php" />
+    </target>
+    <target name="bootstrap">        
+        <exec command="rm -rf cache/*" />
+        <exec command="cp -r app/bundles/Bootstrap/Cache/* cache" />
+    </target>
+</project>
