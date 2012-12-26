@@ -49,6 +49,10 @@ La documentazione
 
 Questa documentazione è compilabile con rst2pdf.
 
+.. math::
+
+    \frac{2 \pm \sqrt{7}}{3}
+
 Cache
 =====
 
