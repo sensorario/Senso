@@ -1,0 +1,3 @@
+#!/bin/bash
+
+rst2pdf doc/index.rst -o doc/manual.pdf

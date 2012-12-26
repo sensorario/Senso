@@ -1,6 +1,5 @@
-===========
-Senso Guide
-===========
+La guida di Senso
+=================
 
 .. header::
 
@@ -33,28 +32,20 @@ Senso Guide
 Introduzione
 ============
 
-Usando Symfony2 e Doctrine, mi sono avvicinato alle annotation nel mondo PHP. Per gioco, ho cercato di implementarle a mia volta. Come esercizio, mi sono dato un MVC che mi ricordasse Symfony2 o Yii. Già che c'ero, ho anche cercato di fare un piccolissimo template engine. **Senso** è il risultato. Ecco cosa ho cercato di emulare:
+Per gioco, ho cercato di implementarle le annotations come ho visto fare su altri
+frameworks. Come esercizio, mi sono dato un MVC che mi ricordasse Symfony2 o Yii.
+Già che c'ero, ho anche cercato di fare un piccolissimo template engine. 
+**Senso** è il risultato. 
 
-* (Symfony2) la potenza di un comando lanciato da console
-* (Symfony2) la struttura a bundle
-* un template engine rudimentale per semplificare il codice
-
-Vendors:
-
-* (bootstrap) un framework css
-* (jquery) un framework javascript
-
+-----------------
 La documentazione
-=================
+-----------------
 
 Questa documentazione è compilabile con rst2pdf.
 
-.. math::
-
-    \frac{2 \pm \sqrt{7}}{3}
-
+-----
 Cache
-=====
+-----
 
 Quando il template engine renderizza le pagine, viene generata una cache con il 
 codice già compilato. Questo serve per non rielaborare una pagina ogni volta. Il
@@ -65,8 +56,9 @@ e mostra direttalmente il codice già compilato in precedenza.
 La stessa coda accade con le rotte: vengono generate e calcolate usando la console
 e non ad ogni richiesta.
 
+---------------------
 calcolati/routing.php
-=====================
+---------------------
 
 Questo è un esempio di come potrebbe essere costruito un file delle rotte. Come
 si può vedere è possibile risalire ad una rotta da una action o viceversa. Oppure
@@ -107,8 +99,9 @@ importante, possiamo anche ricavare il layout di base da una determinata acion.
 	'Blog/Controllers/Dashboard::sandro'=>'default',
     ]];
 
+-----------
 VirtualHost
-===========
+-----------
 
 Ecco il mio VirtualHost per poter usare Senso.
 
@@ -141,15 +134,24 @@ Ecco il mio VirtualHost per poter usare Senso.
 Console
 =======
 
-Trovo che la console mi sia sempre stata di grande aiuto con Symfony2 quindi ho pensato di creare qualche comando che mi semplificasse la vita.
+Trovo che la console mi sia sempre stata di grande aiuto con Symfony2 quindi ho
+pensato di creare qualche comando che mi semplificasse la vita.
 
+* $ ./docgen
 * $ ./routes
 * $ ./show-routes
 
 chiamate alternative:
 
+* $ rst2pdf doc/index.rst -o doc/manual.pdf
 * $ php console/routes.php
 * $ php console/show-routes.php
+
+--------
+./docgen
+--------
+
+Docgen è un comando scritto per convertire questa documentazione in un file pdf.
 
 --------
 ./routes
@@ -251,6 +253,16 @@ Sample Controller
 
 Template Engine
 ===============
+
+------------
+Il ciclo for
+------------
+
+E' possibile usare il ciclo for.
+        
+    {for 6 times}!{endfor}
+
+Questo stamperà "!!!!!!"
 
 ---------
 Variabili
