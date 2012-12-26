@@ -1,5 +1,37 @@
-Senso
------
+===========
+Senso Guide
+===========
+
+.. header::
+
+   .. oddeven::
+
+      .. class:: headertable
+
+      +---+---------------------+----------------+
+      |   |.. class:: centered  |.. class:: right|
+      |   |                     |                |
+      |   |Section ###Section###|Page ###Page### |
+      +---+---------------------+----------------+
+
+      .. class:: headertable
+
+      +---------------+---------------------+---+
+      |               |.. class:: centered  |   |
+      |               |                     |   |
+      |Page ###Page###|Section ###Section###|   |
+      +---------------+---------------------+---+
+
+.. contents::
+
+.. section-numbering::
+
+.. raw:: pdf
+
+   PageBreak oneColumn
+
+Introduzione
+============
 
 Usando Symfony2 e Doctrine, mi sono avvicinato alle annotation nel mondo PHP. Per gioco, ho cercato di implementarle a mia volta. Come esercizio, mi sono dato un MVC che mi ricordasse Symfony2 o Yii. Già che c'ero, ho anche cercato di fare un piccolissimo template engine. **Senso** è il risultato. Ecco cosa ho cercato di emulare:
 
@@ -11,6 +43,11 @@ Vendors:
 
 * (bootstrap) un framework css
 * (jquery) un framework javascript
+
+La documentazione
+=================
+
+Questa documentazione è compilabile con rst2pdf.
 
 Cache
 =====
