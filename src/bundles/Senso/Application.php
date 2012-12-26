@@ -10,7 +10,7 @@ class Application
 
     public function __construct($environment = self::ENV_PROD)
     {
-        $rotteValide = require __DIR__ . '/../../../routing.php';
+        $rotteValide = require __DIR__ . '/../../../calcolati/routing.php';
         if(in_array($_SERVER['REDIRECT_URL'], $rotteValide['routes'])) {
             $action = $rotteValide['actions'][$_SERVER['REDIRECT_URL']];
             $view = $rotteValide['views'][$action];

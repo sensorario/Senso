@@ -1,11 +1,9 @@
 <?php
 
-include 'ClassLoader.php';
+namespace Senso;
 
-for ($i = 0; $i <= 40; $i++)
-    echo "\n";
-
-echo "\n\nI am console routes generator";
+use \ReflectionClass;
+use \ReflectionMethod;
 
 class ControllersFinder
 {
@@ -19,7 +17,7 @@ class ControllersFinder
 
     protected function setBundleDirectory()
     {
-        $this->bundleDirectory = __DIR__ . '/app/bundles';
+        $this->bundleDirectory = __DIR__ . '/../../../app/bundles';
     }
 
     protected function getHandleOfBundleDirectory()
@@ -69,6 +67,11 @@ class ControllersFinder
 
     public function __construct()
     {
+        for ($i = 0; $i <= 40; $i++)
+            echo "\n";
+
+        echo "\n\nI am console routes generator";
+
         $all = [];
 
         $this->setBundleDirectory();
@@ -191,7 +194,7 @@ class ControllersFinder
         }
         $file .= ']];';
 
-        $handle = fopen("routing.php", "w+");
+        $handle = fopen("calcolati/routing.php", "w+");
         fwrite($handle, $file);
         fclose($handle);
 
@@ -199,4 +202,3 @@ class ControllersFinder
     }
 
 }
-(new ControllersFinder());

@@ -5,7 +5,7 @@
         <exec command="php routes.php" />
     </target>
     <target name="bootstrap">        
-        <exec command="rm -rf cache/*" />
-        <exec command="cp -r app/bundles/Bootstrap/Cache/* cache" />
+        <exec command="rm -rf ../cache/*" />
+        <exec command="cp -r ../app/bundles/Bootstrap/Cache/* ../cache" />
     </target>
 </project>

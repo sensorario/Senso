@@ -1,6 +1,8 @@
 <?php
 
-include 'ClassLoader.php';
+include 'src/bundles/Senso/ClassLoader.php';
 
-(new Senso\Application(Senso\Application::ENV_DEV));
+use Senso\Application;
+
+(new Application(Application::ENV_DEV));
 

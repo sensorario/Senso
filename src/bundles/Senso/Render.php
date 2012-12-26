@@ -12,7 +12,7 @@ class Render
 
     private function compilePhp($model, $layout, $matchParts = null)
     {
-        $consts = require __DIR__ . '/../../../routing.php';
+        $consts = require __DIR__ . '/../../../calcolati/routing.php';
         foreach ($model as $key => $value) {
             $this->globals .= '<?php $' . $key . ' = "' . $value . '"; ?>';
         }
