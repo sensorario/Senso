@@ -12,6 +12,91 @@ Vendors:
 * (bootstrap) un framework css
 * (jquery) un framework javascript
 
+Cache
+=====
+
+Quando il template engine renderizza le pagine, viene generata una cache con il 
+codice già compilato. Questo serve per non rielaborare una pagina ogni volta. Il
+sistema controlla se esiste il template richiesto e se non esiste lo genera e
+poi lo mostra a video. Quando invece esiste già, non si cura del template engine
+e mostra direttalmente il codice già compilato in precedenza.
+
+La stessa coda accade con le rotte: vengono generate e calcolate usando la console
+e non ad ogni richiesta.
+
+calcolati/routing.php
+=====================
+
+Questo è un esempio di come potrebbe essere costruito un file delle rotte. Come
+si può vedere è possibile risalire ad una rotta da una action o viceversa. Oppure
+possiamo ricavare la action partendo dal nome della rotta. Ultimo ma non meno
+importante, possiamo anche ricavare il layout di base da una determinata acion.
+
+::
+
+    <?php return ['routes'=>[
+	'Manual/Controllers/Manual::index'=>'/manual',
+	'Manual/Controllers/Manual::credits'=>'/manualcredits',
+	'Sensorario/Controllers/Sensorario::contatti'=>'/contatti/contacts',
+	'Sensorario/Controllers/Altro::index'=>'/',
+	'Blog/Controllers/Dashboard::sandro'=>'/blog/dashboard',
+    ],'actions'=>[
+	'/manual'=>'Manual/Controllers/Manual::index',
+	'/manualcredits'=>'Manual/Controllers/Manual::credits',
+	'/contatti/contacts'=>'Sensorario/Controllers/Sensorario::contatti',
+	'/'=>'Sensorario/Controllers/Altro::index',
+	'/blog/dashboard'=>'Blog/Controllers/Dashboard::sandro',
+    ],'views'=>[
+	'Manual/Controllers/Manual::index'=>'index',
+	'Manual/Controllers/Manual::credits'=>'credits',
+	'Sensorario/Controllers/Sensorario::contatti'=>'contatti',
+	'Sensorario/Controllers/Altro::index'=>'index',
+	'Blog/Controllers/Dashboard::sandro'=>'dashboard',
+    ],'names'=>[
+	'manual_homepage'=>'Manual/Controllers/Manual::index',
+	'manual_credits'=>'Manual/Controllers/Manual::credits',
+	'contatti'=>'Sensorario/Controllers/Sensorario::contatti',
+	'homepage'=>'Sensorario/Controllers/Altro::index',
+	'blog_dashboard'=>'Blog/Controllers/Dashboard::sandro',
+    ],'layouts'=>[
+	'Manual/Controllers/Manual::index'=>'default',
+	'Manual/Controllers/Manual::credits'=>'default',
+	'Sensorario/Controllers/Sensorario::contatti'=>'default',
+	'Sensorario/Controllers/Altro::index'=>'default',
+	'Blog/Controllers/Dashboard::sandro'=>'default',
+    ]];
+
+VirtualHost
+===========
+
+Ecco il mio VirtualHost per poter usare Senso.
+
+::
+
+    <VirtualHost *:80>
+
+            ServerAdmin sensorario@gmail.com
+            ServerName senso
+            ServerAlias senso.local.com 
+            DocumentRoot /var/www/Senso
+            DirectoryIndex index.php
+
+            <Directory /var/www/Senso>
+                    AllowOverride all
+            </Directory>
+
+            ErrorLog ${APACHE_LOG_DIR}/senso.error.log
+
+            # Possible values include: debug, info, notice, warn, error, crit,
+            # alert, emerg.
+
+            LogLevel notice
+
+            CustomLog ${APACHE_LOG_DIR}/senso.access.log combined
+
+    </VirtualHost>
+
+
 Console
 =======
 
@@ -46,9 +131,9 @@ mostrato un output più o meno simile a questo:
 Sulla sinistra è possibile vedere il nome della rotta mentre sulla destra il metodo
 che verrà invocato quando si aprirà quella particolare rotta.
 
---------
+-------------
 ./show-routes
---------
+-------------
 
 Una volta trovate tutte le rotte verrà generato un file che le conterrà tutte.
 
