@@ -2,7 +2,7 @@
     <target name="all" depends="routing,bootstrap">
     </target>
     <target name="routing">
-        <exec command="php routes.php" />
+        <exec command="./routes" />
     </target>
     <target name="bootstrap">        
         <exec command="rm -rf ../cache/*" />
