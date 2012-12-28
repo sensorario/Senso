@@ -6,7 +6,6 @@ use Sensorario\Config\Settings;
 
 /**
  * @BaseRoute(value="/blog")
- * @BaseLayout(value="default")
  */
 class Dashboard
 {

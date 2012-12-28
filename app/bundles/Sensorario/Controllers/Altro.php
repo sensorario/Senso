@@ -5,9 +5,7 @@ namespace Sensorario\Controllers;
 use Sensorario\Config\Settings;
 
 /**
- * @BaseLayout(value="default")
  * @BaseRoute(value="/")
- * @Autore(value="Simone Gentili")
  */
 class Altro
 {

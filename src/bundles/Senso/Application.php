@@ -27,18 +27,9 @@ class Application
                 die("{$action}() deve restituire un array.");
             }
             $bundle = (explode("\\", $class)[1]);
-            $layout = file_get_contents(__DIR__ . "/../../../app/bundles/" . $bundle . "/Layouts/" . $rotteValide['layouts'][$action] . '.php');
-            switch ($engine) {
-                case self::ENGINE_RENDER:
-                    echo (new Render($model, $viewPaht, $environment, $layout))
-                            ->getRenderedCache();
-                    break;
-                case self::ENGINE_TEMPLATE:
-                    echo (new Template($viewPaht, $bundle))
-                            ->model($model)
-                            ->getRenderedCache();
-                    break;
-            }
+            echo (new Template($viewPaht, $bundle))
+                    ->model($model)
+                    ->getRenderedCache();
         } else {
             echo "Rotta {$_SERVER['REDIRECT_URL']} non valida";
         }
