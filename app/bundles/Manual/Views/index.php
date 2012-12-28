@@ -1,3 +1,6 @@
+{extends 'Layouts/default'}
+
+{start content}
 <div class="container">
     <div class="row">
         <div class="span4">
@@ -34,3 +37,4 @@
         </div>
     </div>
 </div>
+{end content}

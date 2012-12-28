@@ -60,7 +60,8 @@
         </div>
     </div>
 </div>
-        {{content}}
+        {start content}
+        {end content}
         <script src="/cache/bootstrap/js/bootstrap-transition.js"></script>
         <script src="/cache/bootstrap/js/bootstrap-alert.js"></script>
         <script src="/cache/bootstrap/js/bootstrap-modal.js"></script>

@@ -37,6 +37,9 @@ frameworks. Come esercizio, mi sono dato un MVC che mi ricordasse Symfony2 o Yii
 Già che c'ero, ho anche cercato di fare un piccolissimo template engine. 
 **Senso** è il risultato. 
 
+Questo MVC serve più che altro per apprendere cose nuove con PHP5.4 ed imparare
+ad usare anche rst2pdf per scrivere la mia documentazione.
+
 -----------------
 La documentazione
 -----------------
@@ -56,54 +59,17 @@ e mostra direttalmente il codice già compilato in precedenza.
 La stessa coda accade con le rotte: vengono generate e calcolate usando la console
 e non ad ogni richiesta.
 
----------------------
-calcolati/routing.php
----------------------
+Configurazione
+==============
 
-Questo è un esempio di come potrebbe essere costruito un file delle rotte. Come
-si può vedere è possibile risalire ad una rotta da una action o viceversa. Oppure
-possiamo ricavare la action partendo dal nome della rotta. Ultimo ma non meno
-importante, possiamo anche ricavare il layout di base da una determinata acion.
-
-::
-
-    <?php return ['routes'=>[
-	'Manual/Controllers/Manual::index'=>'/manual',
-	'Manual/Controllers/Manual::credits'=>'/manualcredits',
-	'Sensorario/Controllers/Sensorario::contatti'=>'/contatti/contacts',
-	'Sensorario/Controllers/Altro::index'=>'/',
-	'Blog/Controllers/Dashboard::sandro'=>'/blog/dashboard',
-    ],'actions'=>[
-	'/manual'=>'Manual/Controllers/Manual::index',
-	'/manualcredits'=>'Manual/Controllers/Manual::credits',
-	'/contatti/contacts'=>'Sensorario/Controllers/Sensorario::contatti',
-	'/'=>'Sensorario/Controllers/Altro::index',
-	'/blog/dashboard'=>'Blog/Controllers/Dashboard::sandro',
-    ],'views'=>[
-	'Manual/Controllers/Manual::index'=>'index',
-	'Manual/Controllers/Manual::credits'=>'credits',
-	'Sensorario/Controllers/Sensorario::contatti'=>'contatti',
-	'Sensorario/Controllers/Altro::index'=>'index',
-	'Blog/Controllers/Dashboard::sandro'=>'dashboard',
-    ],'names'=>[
-	'manual_homepage'=>'Manual/Controllers/Manual::index',
-	'manual_credits'=>'Manual/Controllers/Manual::credits',
-	'contatti'=>'Sensorario/Controllers/Sensorario::contatti',
-	'homepage'=>'Sensorario/Controllers/Altro::index',
-	'blog_dashboard'=>'Blog/Controllers/Dashboard::sandro',
-    ],'layouts'=>[
-	'Manual/Controllers/Manual::index'=>'default',
-	'Manual/Controllers/Manual::credits'=>'default',
-	'Sensorario/Controllers/Sensorario::contatti'=>'default',
-	'Sensorario/Controllers/Altro::index'=>'default',
-	'Blog/Controllers/Dashboard::sandro'=>'default',
-    ]];
+Per essere utilizzato **Senso** richiede qualche piccola configazione. Per esempio
+dobbiamo impostare il nostro VirtualHost nel file **/etc/apache2/sites-available/Senso**.
 
 -----------
 VirtualHost
 -----------
 
-Ecco il mio VirtualHost per poter usare Senso.
+Ecco il contenuto del mio VirtualHost per poter usare Senso.
 
 ::
 
@@ -251,8 +217,51 @@ Sample Controller
 
     }
 
-Template Engine
-===============
+Template Engine (Template)
+==========================
+
+Questo engine è più potente perchè consente di estendere un template dal template
+stesso. Mentre in Render bisogna indicare il layout al quale applicare una data 
+view, in Template basta usare una parola chiave.
+
+Con questo engine non serve usare la annotation @BaseLayout.
+
+::
+
+    echo (new Template($viewPaht, $bundle, $model))
+            ->getRenderedCache();
+
+-------
+extends
+-------
+
+Per indicare il layout che si vuole estendere, bisogna usare la parola chiave
+
+::
+
+    {extends 'nome_template'}
+
+-------
+blocchi
+-------
+
+Dentro al layout ed alle view si possono indicare i blocchi in questo modo:
+
+::
+
+    {start nome_blocco}
+        ...
+    {end nome_blocco}
+
+
+
+Template Engine (Render)
+========================
+
+::
+
+    echo (new Render($model, $viewPaht, $environment, $layout))
+            ->getRenderedCache();
 
 ------------
 Il ciclo for
@@ -314,3 +323,51 @@ e che come parametro abbia name="contatti" proprio come indicato qui sotto:
     {
         return Settings::getGlobals([]);
     }
+
+Configurazione applicazione
+===========================
+
+---------------------
+calcolati/routing.php
+---------------------
+
+Questo è un esempio di come potrebbe essere costruito un file delle rotte. Come
+si può vedere è possibile risalire ad una rotta da una action o viceversa. Oppure
+possiamo ricavare la action partendo dal nome della rotta. Ultimo ma non meno
+importante, possiamo anche ricavare il layout di base da una determinata acion.
+
+Questo file non va assolutamente scritto a mano ma va creato con il comando **./routes**.
+
+::
+
+    <?php return ['routes'=>[
+	'Manual/Controllers/Manual::index'=>'/manual',
+	'Manual/Controllers/Manual::credits'=>'/manualcredits',
+	'Sensorario/Controllers/Sensorario::contatti'=>'/contatti/contacts',
+	'Sensorario/Controllers/Altro::index'=>'/',
+	'Blog/Controllers/Dashboard::sandro'=>'/blog/dashboard',
+    ],'actions'=>[
+	'/manual'=>'Manual/Controllers/Manual::index',
+	'/manualcredits'=>'Manual/Controllers/Manual::credits',
+	'/contatti/contacts'=>'Sensorario/Controllers/Sensorario::contatti',
+	'/'=>'Sensorario/Controllers/Altro::index',
+	'/blog/dashboard'=>'Blog/Controllers/Dashboard::sandro',
+    ],'views'=>[
+	'Manual/Controllers/Manual::index'=>'index',
+	'Manual/Controllers/Manual::credits'=>'credits',
+	'Sensorario/Controllers/Sensorario::contatti'=>'contatti',
+	'Sensorario/Controllers/Altro::index'=>'index',
+	'Blog/Controllers/Dashboard::sandro'=>'dashboard',
+    ],'names'=>[
+	'manual_homepage'=>'Manual/Controllers/Manual::index',
+	'manual_credits'=>'Manual/Controllers/Manual::credits',
+	'contatti'=>'Sensorario/Controllers/Sensorario::contatti',
+	'homepage'=>'Sensorario/Controllers/Altro::index',
+	'blog_dashboard'=>'Blog/Controllers/Dashboard::sandro',
+    ],'layouts'=>[
+	'Manual/Controllers/Manual::index'=>'default',
+	'Manual/Controllers/Manual::credits'=>'default',
+	'Sensorario/Controllers/Sensorario::contatti'=>'default',
+	'Sensorario/Controllers/Altro::index'=>'default',
+	'Blog/Controllers/Dashboard::sandro'=>'default',
+    ]];

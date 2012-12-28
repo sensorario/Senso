@@ -1,3 +1,6 @@
+{extends 'default'}
+
+{start content}
 <div class="container">
     <div class="hero-unit">
         <h1>Contattaci!</h1>
@@ -7,3 +10,4 @@
         </ul>
     </div>
 </div>
+{end content}

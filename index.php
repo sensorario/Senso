@@ -2,7 +2,8 @@
 
 include 'src/bundles/Senso/ClassLoader.php';
 
-use Senso\Application;
-
-(new Application(Application::ENV_DEV));
+(new Senso\Application(
+                Senso\Application::ENV_DEV,
+                Senso\Application::ENGINE_TEMPLATE
+        ));
 

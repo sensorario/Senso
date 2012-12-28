@@ -1,3 +1,6 @@
+{extends 'default'}
+
+{start content}
 <div class="container">
     <div class="hero-unit">
         <h1>Blog!</h1>
@@ -5,3 +8,4 @@
         <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
     </div>
 </div>
+{end content}

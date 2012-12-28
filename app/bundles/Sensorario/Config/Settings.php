@@ -8,6 +8,7 @@ class Settings
     public static function getGlobals($locals)
     {
         return $locals + [
+            'description' => 'RobbaGrossa',
             'title' => 'Vigliac',
             'variabile' => 'valore',
             'email' => 'sensorario@gmail.com',
