@@ -253,26 +253,6 @@ Dentro al layout ed alle view si possono indicare i blocchi in questo modo:
         ...
     {end nome_blocco}
 
-
-
-Template Engine (Render)
-========================
-
-::
-
-    echo (new Render($model, $viewPaht, $environment, $layout))
-            ->getRenderedCache();
-
-------------
-Il ciclo for
-------------
-
-E' possibile usare il ciclo for.
-        
-    {for 6 times}!{endfor}
-
-Questo stamperà "!!!!!!"
-
 ---------
 Variabili
 ---------
