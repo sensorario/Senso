@@ -106,12 +106,16 @@ pensato di creare qualche comando che mi semplificasse la vita.
 * $ ./docgen
 * $ ./routes
 * $ ./show-routes
+* $ ./clean-cache
+* $ ./copy-bootstrap
 
 chiamate alternative:
 
 * $ rst2pdf doc/index.rst -o doc/manual.pdf
 * $ php console/routes.php
 * $ php console/show-routes.php
+* ...
+* ...
 
 --------
 ./docgen
@@ -159,6 +163,18 @@ Una volta trovate tutte le rotte verrà generato un file che le conterrà tutte.
 Da questo momento in poi non avrà più importanza in quale controller si trovi
 una action: l'importante sarà indicare la rotta ed il proprio nome sulle proprie
 annotations.
+
+-------------
+./clean-cache
+-------------
+
+Pulisce la cartella della cache.
+
+----------------
+./copy-bootstrap
+----------------
+
+Ricopia bootstrap nella cache.
 
 Annotations
 ===========
