@@ -1,11 +1,11 @@
 <project name="Senso" default="all">
-    <target name="all" depends="routing,bootstrap">
+    <target name="all" depends="bootstrap,routing">
     </target>
     <target name="routing">
         <exec command="./routes" />
     </target>
     <target name="bootstrap">        
-        <exec command="rm -rf ../cache/*" />
-        <exec command="cp -r ../app/bundles/Bootstrap/Cache/* ../cache" />
+        <exec command="rm -rf ./cache/*" />
+        <exec command="cp -r ./app/bundles/Bootstrap/Cache/* ./cache" />
     </target>
 </project>
