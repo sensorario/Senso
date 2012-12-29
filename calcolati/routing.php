@@ -25,7 +25,7 @@
 ],'layouts'=>[
 	'Manual/Controllers/Manual::index'=>'default',
 	'Manual/Controllers/Manual::credits'=>'default',
-	'Sensorario/Controllers/Sensorario::contatti'=>'default',
-	'Sensorario/Controllers/Altro::index'=>'default',
-	'Blog/Controllers/Dashboard::sandro'=>'default',
+	'Sensorario/Controllers/Sensorario::contatti'=>'',
+	'Sensorario/Controllers/Altro::index'=>'',
+	'Blog/Controllers/Dashboard::sandro'=>'',
 ]];
