@@ -5,64 +5,80 @@ namespace Senso;
 use \ReflectionClass;
 use \ReflectionMethod;
 
+
 class ControllersFinder
 {
 
     private $nonFolders = ['.', '..'];
+
     private $bundleDirectory;
+
     private $itemController;
+
     private $controllersDirHandle;
+
     private $itemDirectory;
+
     private $bundleDirHandle;
 
     protected function setBundleDirectory()
     {
         $this->bundleDirectory = __DIR__ . '/../../../app/bundles';
+
     }
 
     protected function getHandleOfBundleDirectory()
     {
         $this->bundleDirHandle = opendir($this->bundleDirectory);
+
     }
 
     protected function isValidDirectory($dir)
     {
         return !in_array($dir, $this->nonFolders);
+
     }
 
     protected function getCurrentControllersFolder()
     {
         return "{$this->bundleDirectory}/{$this->itemDirectory}/Controllers";
+
     }
 
     protected function fetchController()
     {
         return $this->itemController = readdir($this->controllersDirHandle);
+
     }
 
     protected function handleControllersDirectory()
     {
         $this->controllersDirHandle = opendir($this->getCurrentControllersFolder());
+
     }
 
     public function fetchDirectory()
     {
         return $this->itemDirectory = readdir($this->bundleDirHandle);
+
     }
 
     protected function isValidItemDirectory()
     {
         return $this->isValidDirectory($this->itemDirectory);
+
     }
 
     protected function isValidItemController()
     {
         return $this->isValidDirectory($this->itemController);
+
     }
 
     protected function existsItemDirectory()
     {
         return file_exists($this->getCurrentControllersFolder());
+
     }
 
     public function __construct()
@@ -76,12 +92,12 @@ class ControllersFinder
 
         $this->setBundleDirectory();
         $this->getHandleOfBundleDirectory();
-        while ($this->fetchDirectory()) {
-            if($this->isValidItemDirectory()) {
-                if($this->existsItemDirectory()) {
+        while($this->fetchDirectory()){
+            if ($this->isValidItemDirectory()) {
+                if ($this->existsItemDirectory()) {
                     $this->handleControllersDirectory();
-                    while ($this->fetchController()) {
-                        if($this->isValidItemController()) {
+                    while($this->fetchController()){
+                        if ($this->isValidItemController()) {
 
                             /* Mostro il controller che devo caricare */
                             //echo "\n\n\tController: {$this->getCurrentControllersFolder()}/{$this->itemController}";
@@ -118,13 +134,13 @@ class ControllersFinder
                                         preg_match_all("/(\@)(.*)(\()/", $annotation, $matchesMethodItemKey);
                                         preg_match_all("/(\()(.*)(\))/", $annotation, $matchesMethodItemValue);
 
-                                        if(strpos($matchesMethodItemValue[2][0], ",")) {
+                                        if (strpos($matchesMethodItemValue[2][0], ",")) {
                                             foreach (explode(",", $matchesMethodItemValue[2][0]) as $params) {
-                                                if(explode("=", $params)[0] == 'value') {
+                                                if (explode("=", $params)[0] == 'value') {
                                                     $valueRefactored = str_replace('"', "", explode("=", $params)[1]);
                                                     $all[$className]['methods'][$method->name][$matchesMethodItemKey[2][0]] = $valueRefactored;
                                                 }
-                                                if(explode("=", $params)[0] == 'name') {
+                                                if (explode("=", $params)[0] == 'name') {
                                                     $valueRefactored = str_replace('"', "", explode("=", $params)[1]);
                                                     $all[$className]['names'][$method->name] = $valueRefactored;
                                                 }
@@ -153,18 +169,20 @@ class ControllersFinder
         foreach ($all as $controllerClass => $bundles) {
             foreach ($bundles['methods'] as $key => $value) {
                 foreach ($value as $method => $methodValue) {
-                    if($method == "Route") {
+                    if ($method == "Route") {
                         //echo "\n\t{$bundles['BaseRoute']}{$methodValue} = {$controllerClass}::{$key}();";
                         $rotte["{$bundles['BaseRoute']}{$methodValue}"] = "{$controllerClass}::{$key}";
                     }
-                    if($method == "View") {
+                    if ($method == "View") {
                         //echo "\n\t{$controllerClass}::{$key} = {$methodValue}();";
                         $viste["{$controllerClass}::{$key}"] = "{$methodValue}";
                     }
-                    $layouts["{$controllerClass}::{$key}"] = "{$bundles['BaseLayout']}";
+                    if (isset($bundles['BaseLayout'])) {
+                        $layouts["{$controllerClass}::{$key}"] = "{$bundles['BaseLayout']}";
+                    }
                 }
             }
-            if(isset($bundles['names'])) {
+            if (isset($bundles['names'])) {
                 foreach ($bundles['names'] as $key => $value) {
                     echo "\n\t\033[01;32m{$value} = {$controllerClass}::{$key}(); \033[0m";
                     $nomi["{$value}"] = "{$controllerClass}::{$key}";
@@ -199,6 +217,7 @@ class ControllersFinder
         fclose($handle);
 
         echo "\n\n\n";
+
     }
 
 }

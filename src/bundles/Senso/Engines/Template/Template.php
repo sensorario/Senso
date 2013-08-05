@@ -4,7 +4,7 @@ namespace Senso\Engines\Template;
 
 /* @todo: Isolare la logica (salvo la cache) per entrambi gli engine. */
 
-use Senso\Application;
+//use Senso\Application;
 use Senso\Engines\Base\Engine;
 
 class Template extends Engine
@@ -95,7 +95,7 @@ class Template extends Engine
         return $this;
     }
 
-    public function __construct($view, $bundle)
+    public function __construct($view, $bundle = 'Sensorario')
     {
         parent::__construct($view);
 
