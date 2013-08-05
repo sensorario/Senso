@@ -1,0 +1,6 @@
+# How to start
+
+To start with Senso run this commands:
+
+    $ ./routes
+    $ ./copy-bootstrap 
